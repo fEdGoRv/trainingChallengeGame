@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import AsanaRandom from './Components/Pure/AsanaRandom.jsx';
+import GameBoard from './Components/Pure/GameBoard.jsx';
+import Header from './Components/Pure/Header.jsx'
+import { useState } from 'react';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  const [activePlayer, setActivePlayer] = useState('X');
+  const [gameTurns, setGameTurns] = useState([]);
+
+
+  function handleSquareSymbol(rowIndex, colIndex) {
+    setActivePlayer((curSelectedPlayer) => (curSelectedPlayer === 'X' ? 'O' : 'X'));
+    setGameTurns((prevTurns) => {
+      let currentPlayer = 'X';
+
+      if (prevTurns.length > 0 && prevTurns[0].player === 'X') {
+        currentPlayer = 'O';
+      }
+
+      const updatedTurns = [{
+        square: { row: rowIndex, col: colIndex },
+        player: currentPlayer,
+      }, ...prevTurns];
+    return updatedTurns;
+  });
+}
+
+return (
+  <div className="App">
+    <Header activePlayer={activePlayer} />
+    <AsanaRandom className="text-center" name={"Chaturanga"} />
+    <GameBoard handleSquareSymbol={handleSquareSymbol} turns={gameTurns} />
+  </div>
+);
 }
 
 export default App;
