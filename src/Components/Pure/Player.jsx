@@ -14,7 +14,7 @@ export default function Player({ inicialName, symbol, isActive, activePlayer, ..
     }
 
     const active = "border-solid border-3 text-red rounded border-red-600";
-    const inActive = "align-middle"
+    const inActive = "align-middle";
 
     return (
         <div {...props} className="flex space-x-8 align-middle  w-2/4 bg-amber-400 ">
