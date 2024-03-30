@@ -3,6 +3,7 @@ import Button from './Button';
 
 
 export default function GameBoard({handleSquareSymbol, turns}) {
+    console.log(turns)
 
         let inicialGameBoard = [
             [
