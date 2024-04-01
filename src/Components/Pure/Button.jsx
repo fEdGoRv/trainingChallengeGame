@@ -14,9 +14,9 @@ function Button({children, className, player, ...props}) {
     
     function handleButton(){
         if(player === 'X'){
-          return <div className='bg-amber-500 w-32 m-12 rounded border-solid border-2 border-white p-4'>{x}</div>
+          return <div className='bg-amber-500 w-32 h-32 m-12 rounded border-solid border-2 border-white p-4'>{x}</div>
         }else if(player === 'O'){
-          return <div className='bg-amber-500 w-32 m-12 rounded border-solid border-2 border-white p-4'>{o}</div>
+          return <div className='bg-amber-500 w-32 h-32 m-12 rounded border-solid border-2 border-white p-4'>{o}</div>
         }else {
           return inicialsButtons; 
         }
