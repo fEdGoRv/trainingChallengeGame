@@ -13,13 +13,13 @@ export default function Player({ inicialName, symbol, isActive, activePlayer, ..
         setPlayerName(event.target.value);
     }
 
-    const active = "border-solid border-3 text-red rounded border-red-600";
-    const inActive = "align-middle";
+    const active = "border-solid border-3 text-red rounded border-red-600 flex space-x-8";
+    const inActive = "text-center flex space-x-8";
 
     return (
-        <div {...props} className="flex space-x-8 align-middle  w-2/4 bg-amber-400 ">
-            <span className="flex space-x-8 "  >
-                <div className={isActive ? active : inActive}>{player}</div>
+        <div {...props} className="flex space-x-8 w-2/4 bg-amber-400">
+            <span className={isActive ? active : inActive}  >
+                <div>{player}</div>
                 <div>{symbol === 'X' ? <img className="w-10" src={xXx} alt="Icon" /> : <img className="w-10" src={oOo} alt="Icon" />}</div>
             </span>
             <Button onClick={() => setIsEditing((editting) => !editting)} >{buttonLabel}</Button>

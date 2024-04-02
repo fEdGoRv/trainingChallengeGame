@@ -4,6 +4,7 @@ import Header from './Components/Pure/Header.jsx'
 import { useState } from 'react';
 import Log from './Components/Pure/log.jsx';
 import {WINNING_COMBINATIONS} from './Components/Pure/WINNING_COMBINATIONS.jsx'
+import GameOver from './Components/Pure/GameOver.jsx';
 
 let inicialGameBoard = [
   [
@@ -36,7 +37,7 @@ function App() {
 
   let winner;
 
-  const gameBoard = inicialGameBoard;
+  const gameBoard = [...inicialGameBoard.map(array => [...array])];
     for(const turn of gameTurns){
         let {square, player} = turn;
         const {row, col} = square;
@@ -52,7 +53,12 @@ function App() {
     if(firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && secondSquareSymbol===thirdSquareSymbol){
         winner = firstSquareSymbol;
     }
+  }
+ 
+  const hasDraw = gameTurns.length === 9 && !winner;
 
+  function reStart(){
+    setGameTurns([]);
   }
 
   function handleSquareSymbol(rowIndex, colIndex) {
@@ -69,9 +75,9 @@ function App() {
 }
 
 return (
-  <div className="App">
+  <div className="text-center static">
     <Header activePlayer={activePlayer} />
-    {winner && <p>You won {winner}!!</p>}
+    {(winner || hasDraw) && <GameOver winner={winner} onRestart={reStart}/>}
     <GameBoard handleSquareSymbol={handleSquareSymbol} board={gameBoard} />
     <Log turns={gameTurns} />
   </div>
