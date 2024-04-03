@@ -3,12 +3,15 @@ import Button from "./Button";
 import xXx from "../../assets/x-letter.svg";
 import oOo from "../../assets/OO.svg";
 
-export default function Player({ inicialName, symbol, isActive, activePlayer, ...props}) {
+export default function Player({ inicialName, symbol, isActive, activePlayer, onChangeName, ...props}) {
     const [playerName, setPlayerName] = useState(inicialName);
     const [isEditing, setIsEditing] = useState(false);
+
     let inp = <input className="h-10 border-4 border-black bg-orange-300 rounded" type="text" required value={playerName} onChange={handleChange} />;
+
     let player = isEditing ? inp : playerName;
     let buttonLabel =isEditing ? 'Save' : 'Edit';
+
     function handleChange(event) {
         setPlayerName(event.target.value);
     }
@@ -22,7 +25,11 @@ export default function Player({ inicialName, symbol, isActive, activePlayer, ..
                 <div>{player}</div>
                 <div>{symbol === 'X' ? <img className="w-10" src={xXx} alt="Icon" /> : <img className="w-10" src={oOo} alt="Icon" />}</div>
             </span>
-            <Button onClick={() => setIsEditing((editting) => !editting)} >{buttonLabel}</Button>
+            <Button onClick={() => {setIsEditing((editting) => !editting);
+               if(isEditing){
+           onChangeName(symbol,player)
+               }}
+            }>{buttonLabel}</Button>
         </div>
     );
 }
